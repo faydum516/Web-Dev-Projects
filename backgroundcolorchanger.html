@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Multicolored Background</title>
+        <style>
+            body {
+                background-color: blueviolet;
+            }
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 85vh;
+            }
+            .center {
+               height: 200px; 
+            }
+            button {
+                border: 0;
+                color: #FFFFFF;
+                background-color: rgba(220, 20, 47, 0.336);
+                border-radius: 5px;
+                text-align: center;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-weight: 700;
+                width: 200px;
+                height: 35px;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: rgba(220, 20, 47, 0.815);
+            }
+            img {
+                border-radius: 3px;
+                border: 2px solid black;
+            }
+        </style>
+    </head>
+    <body id="background">
+        <div class="container">
+            <div class="center"> 
+                <button onclick="prevcolor()">Prev Background Color</button>
+                <img src = "https://www.airtransat.com/getmedia/abf55182-9be0-44a4-afed-ba3b90daaceb/costa-rica-volcan-volcano-2050x1200.aspx?width=2050&height=1200&ext=.jpg" width = "300px" height = "175px" alt = "Costa Rica Volcano" />
+                <img src = "https://ml1t96gwlnby.i.optimole.com/zff9GTU--5DgmpOr/w:1919/h:1016/q:auto/https://www.villapuntodevista.com/content/uploads/2019/04/sec-water-img.jpg" width = "300px" height = "175px" alt = "Costa Rica Beach" />
+                <button onclick="nextcolor()">Next Background Color</button>
+            </div>
+        </div>
+        <script>
+            var colors = ["blueviolet", "red", "blue", "green", "yellow", "teal", "chocolate", "cyan", "magenta", "crimson", "coral", "aquamarine"];
+            var index = 0;
+            function prevcolor() {
+                index--;
+                if (index < 0) {  
+                    index = colors.length - 1;   
+                }
+                document.getElementById("background").style.backgroundColor = colors[index];
+            }
+            function nextcolor() {
+                index++;
+                if (index > colors.length - 1) {
+                    index = 0;
+                }
+                document.getElementById("background").style.backgroundColor = colors[index];
+            }
+        </script>
+    </body>
+</html>

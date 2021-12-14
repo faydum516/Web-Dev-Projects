@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Modal</title>
+        <style>
+            #background {
+                background-color: #ffffff;
+            }
+            header {
+                margin-bottom: 100px;
+            }
+            .modal-body {
+                text-align: center; 
+            }
+            .modal-body p {
+                z-index: 0;
+                position: absolute;
+            }
+            #modal-content {
+                z-index: 1;
+                position: relative;
+                background-color: #ffffff;
+                border: 2px solid black;
+                width: 350px;
+                height: 200px;
+                display: none;
+            }
+            .modal-body #modal-content h1 {
+                margin-top: 50px;
+                margin-bottom: 75px;
+            }
+            .modal-body #modal-content button {
+                float: right; 
+                margin-right: 25px;
+                background-color: aquamarine;
+                color: teal;
+            }
+        </style>
+	</head>
+	<body id="background">
+		<header>
+			<button id="openbutton" onclick="openmodal()">Care to join in?</button>
+		</header>
+		<section class="modal-body">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+			<div id="modal-content">
+				<h1>Hello World!</h1>
+				<button class="closebutton" onclick="closemodal()">Close</button>
+			</div>
+		</section>
+		<script>
+			function openmodal() {
+				document.getElementById("background").style.backgroundColor = "rgba(0, 0, 0, 0.4)";
+				document.getElementById("modal-content").style.display = "inline-block";
+				document.getElementById("openbutton").style.visibility = "hidden";
+			}
+			function closemodal() {
+				document.getElementById("background").style.backgroundColor = "#ffffff";
+				document.getElementById("modal-content").style.display = "none";
+				document.getElementById("openbutton").style.visibility = "visible";
+			}
+		</script>
+	</body>
+</html>

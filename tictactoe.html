@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tic-Tac-Toe</title>
+        <style>  
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                width: 100%;
+                height: 100vh;
+                background-color: aquamarine;
+            }
+            .result {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .result header {
+                text-align: center;
+                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                font-size: 22px;
+            }
+            .result-content {
+                height: 150px;
+                width: 250px;
+                background-color: white;
+                border: 3px solid black;
+                padding: 9px;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center; 
+            } 
+            #outcome {
+                visibility: hidden;
+            }
+            .gameboard {
+                width: 100%;
+                height: 90vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+            table {
+                width: 200px; height: 200px; border-collapse:separate; background-color: teal; 
+                border-spacing: 10px 10px; empty-cells: hide;
+            }
+            caption {
+                font-size: larger;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            }
+            td {
+                text-align: center; width: 40px; height: 40px;
+                background-color: white;
+                cursor: pointer;
+            }
+            #first_and_second {
+                text-align: center;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;       
+                font-weight: 700;
+            }
+        </style>
+    </head>
+    <body id="background">
+        <div class="result" id="outcome">
+            <div class="result-content">
+                <header id="winner"></header>
+            </div>
+        </div>
+        <div class="gameboard">
+            <table border="1" align="center">
+                <caption><strong>Tic-Tac-Toe Game</strong></caption>
+                <tr>
+                    <td id="R1C1" class="row1 column1" onclick="input('R1C1')"><br/></td>
+                    <td id="R1C2" class="row1 column2" onclick="input('R1C2')"><br/></td>
+                    <td id="R1C3" class="row1 column3" onclick="input('R1C3')"><br/></td>
+                </tr>
+                <tr>
+                    <td id="R2C1" class="row2 column1" onclick="input('R2C1')"><br/></td>
+                    <td id="R2C2" class="row2 column2" onclick="input('R2C2')"><br/></td>
+                    <td id="R2C3" class="row2 column3" onclick="input('R2C3')"><br/></td>
+                </tr>
+                <tr>
+                    <td id="R3C1" class="row3 column1" onclick="input('R3C1')"><br/></td>
+                    <td id="R3C2" class="row3 column2" onclick="input('R3C2')"><br/></td>
+                    <td id="R3C3" class="row3 column3" onclick="input('R3C3')"><br/></td>
+                </tr>
+            </table>
+            <br/><br/>
+            <p id="first_and_second">Player X's turn</p>
+        </div>
+        <script>
+            var row1, row2, row3, column1, column2, column3, diagonal_left, diagonal_right;
+
+            var check_mark = 'X';
+
+            function input(cell) {
+                // Cells cannot be rewritten
+                if (document.getElementById(cell).innerHTML == "<br>" && document.getElementById(cell).innerHTML == "<br>") {
+                    
+                    document.getElementById(cell).innerHTML = check_mark;   
+
+                    row1 = [document.getElementsByClassName("row1")[0].innerHTML, document.getElementsByClassName("row1")[1].innerHTML, document.getElementsByClassName("row1")[2].innerHTML];
+                    row2 = [document.getElementsByClassName("row2")[0].innerHTML, document.getElementsByClassName("row2")[1].innerHTML, document.getElementsByClassName("row2")[2].innerHTML];
+                    row3 = [document.getElementsByClassName("row3")[0].innerHTML, document.getElementsByClassName("row3")[1].innerHTML, document.getElementsByClassName("row3")[2].innerHTML];
+
+                    column1 = [document.getElementsByClassName("column1")[0].innerHTML, document.getElementsByClassName("column1")[1].innerHTML, document.getElementsByClassName("column1")[2].innerHTML];
+                    column2 = [document.getElementsByClassName("column2")[0].innerHTML, document.getElementsByClassName("column2")[1].innerHTML, document.getElementsByClassName("column2")[2].innerHTML];
+                    column3 = [document.getElementsByClassName("column3")[0].innerHTML, document.getElementsByClassName("column3")[1].innerHTML, document.getElementsByClassName("column3")[2].innerHTML];
+
+                    diagonal_left = [document.getElementsByClassName("row1 column1")[0].innerHTML, document.getElementsByClassName("row2 column2")[0].innerHTML, document.getElementsByClassName("row3 column3")[0].innerHTML];
+                    diagonal_right = [document.getElementsByClassName("row1 column3")[0].innerHTML, document.getElementsByClassName("row2 column2")[0].innerHTML, document.getElementsByClassName("row3 column1")[0].innerHTML];
+                    
+                    //Is there a winner?
+                    if (row1.every(function(check) {return check == check_mark;})) {
+                        document.getElementById("outcome").style.visibility = "visible";
+                        document.getElementById("background").style.backgroundColor = "rgba(7, 95, 66, 0.96)";
+                        document.getElementById("winner").innerHTML = `Player ${check_mark} is the winner.`;
+                    }
+                    if (row2.every(function(check) {return check === check_mark;})) {
+                        document.getElementById("outcome").style.visibility = "visible";
+                        document.getElementById("background").style.backgroundColor = "rgba(7, 95, 66, 0.96)";
+                        document.getElementById("winner").innerHTML = `Player ${check_mark} is the winner.`;
+                    }
+                    if (row3.every(function(check) {return check === check_mark;})) {
+                        document.getElementById("outcome").style.visibility = "visible";
+                        document.getElementById("background").style.backgroundColor = "rgba(7, 95, 66, 0.96)";
+                        document.getElementById("winner").innerHTML = `Player ${check_mark} is the winner.`;
+                    }
+                    if (column1.every(function(check) {return check === check_mark;})) {
+                        document.getElementById("outcome").style.visibility = "visible";
+                        document.getElementById("background").style.backgroundColor = "rgba(7, 95, 66, 0.96)";
+                        document.getElementById("winner").innerHTML = `Player ${check_mark} is the winner.`;
+                    }
+                    if (column2.every(function(check) {return check === check_mark;})) {
+                        document.getElementById("outcome").style.visibility = "visible";
+                        document.getElementById("background").style.backgroundColor = "rgba(7, 95, 66, 0.96)";
+                        document.getElementById("winner").innerHTML = `Player ${check_mark} is the winner.`;
+                    }
+                    if (column3.every(function(check) {return check === check_mark;})) {
+                        document.getElementById("outcome").style.visibility = "visible";
+                        document.getElementById("background").style.backgroundColor = "rgba(7, 95, 66, 0.96)";
+                        document.getElementById("winner").innerHTML = `Player ${check_mark} is the winner.`;
+                    }
+                    if (diagonal_left.every(function(check) {return check === check_mark;})) {
+                        document.getElementById("outcome").style.visibility = "visible";
+                        document.getElementById("background").style.backgroundColor = "rgba(7, 95, 66, 0.96)";
+                        document.getElementById("winner").innerHTML = `Player ${check_mark} is the winner.`;
+                    }
+                    if (diagonal_right.every(function(check) {return check === check_mark;})) {
+                        document.getElementById("outcome").style.visibility = "visible";
+                        document.getElementById("background").style.backgroundColor = "rgba(7, 95, 66, 0.96)";
+                        document.getElementById("winner").innerHTML = `Player ${check_mark} is the winner.`;
+                    }
+
+                    // One checkmark and then another, then back and forth
+                    if (check_mark === 'X') {
+                        check_mark = 'O';
+                    }
+                    else {
+                        check_mark = 'X';
+                    }
+
+                    // One turn at a time  
+                    if (document.getElementById("first_and_second").innerHTML == "Player X's turn") {
+                        document.getElementById("first_and_second").innerHTML = "Player O's turn";
+                    } 
+                    else {
+                        document.getElementById("first_and_second").innerHTML = "Player X's turn";
+                    }
+                }  
+            }  
+        </script>
+    </body>
+</html>

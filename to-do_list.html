@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>To-Do List</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+        body {
+            margin: 0; padding: 0;
+            font-size: 32px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+        header {
+            text-align: center;
+            background-color: #274AC5;
+            color: #FFFFFF;
+            padding: 70px 0;
+        }
+        .input-container {
+            text-align: center;
+            background-color: #6E6DE4;
+            padding: 70px 0;
+        }
+        button {
+            background-color: #28467C;
+            color: #FFFFFF;
+        }
+        #list {
+            text-align: center;
+            background-color: #74AE64;
+            font-size: 16px;
+            padding: 70px 0;
+        }
+        #textBlank {
+            background-color: #FFFFFF;
+            margin-right: 5px;
+            display: inline-block;
+            padding: 0 2px;
+            border: 2px black solid;
+        }
+        footer {
+            text-align: center;
+            background-color: #363636;
+            color: #878787;
+            font-size: 18px;
+            padding: 16px 0;
+        }
+        </style>
+	</head>
+	<body>
+        <header>
+            <p>The To-Do List</p>
+        </header>
+        <section class="input-container">
+            <div>
+                <input id="task" type="text" />
+                <button onclick="add()">Add</button>
+            <div>
+        </section>
+        <section id="list">
+        </section>
+        <footer>
+            <p>&copy; 2021 CrazyJay, Inc.</p>
+        </footer>
+        <script>
+
+            function add() {
+                var div = document.createElement('div');
+                var p = document.createElement('p');
+                var task = document.getElementById("task").value;
+                var node = document.createTextNode(task);
+                p.appendChild(node);
+                p.id = "textBlank";
+                div.appendChild(p);
+                document.getElementById("task").value = "";
+
+                var button = document.createElement("button");
+                button.appendChild(document.createTextNode("Remove"));
+                div.appendChild(button);
+                
+                document.getElementById("list").appendChild(div);
+                button.onclick = function() {remove(div)};
+            }
+            
+            function remove(div) {
+                div.remove();
+            }
+        </script>
+	</body>
+</html>

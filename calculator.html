@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Calculator</title>
+        <style>
+            body {
+                background-color: hsla(167, 64%, 71%, 0.863);
+                text-align: center;
+            }
+            .calculator {
+                border-radius: 5px;
+                display: inline-block;
+                padding: 5px 5px;
+                background-color: red;            
+            }
+            #output {
+                text-align: right;
+                padding: 6px 3px;
+                background-color: #13e68ec0;
+                border-radius: 5px;
+                margin: 0 0 6px 0;
+            }   
+            p {
+                font-size: 20px;
+                font-weight: 900;
+            } 
+            .sixthfloor button, .fifthfloor button,
+            .fourthfloor button, .thirdfloor button, .secondfloor button {
+                margin: 0 0 3px 0;
+                border-radius: 5px;
+                width: 50px;
+                height: 50px;
+                background-color: #15d6cdc9;
+				cursor: pointer;
+            }
+            .firstfloor button {
+                border-radius: 5px;
+                width: 50px;
+                height: 50px;
+                background-color: #15d6cdc9;
+				cursor: pointer;
+            }
+        </style>
+	</head>
+	<body>	 
+        <p>Calculator</p>
+		<div class="calculator">
+			<div id="output">0</div>
+			<div class="sixthfloor">
+				<button onclick="input('sin')">sin</button>
+				<button onclick="input('cos')">cos</button>
+				<button onclick="input('tan')">tan</button>
+				<button onclick="input('π')">π</button>
+			</div>
+			<div class="fifthfloor">
+                <button onclick="input('(')">(</button>
+				<button onclick="input(')')">)</button>
+				<button onclick="input('CE')">CE</button>
+				<button onclick="input('C')">C</button> <!--Clear the whole computation-->
+			</div>
+			<div class="fourthfloor">
+				<button onclick="input('7')">7</button>
+				<button onclick="input('8')">8</button>
+				<button onclick="input('9')">9</button>
+				<button onclick="input('÷')">÷</button>
+			</div>
+			<div class="thirdfloor">
+				<button onclick="input('4')">4</button>
+                <button onclick="input('5')">5</button>
+				<button onclick="input('6')">6</button>
+				<button onclick="input('×')">×</button>
+			</div>
+			<div class="secondfloor">
+				<button onclick="input('1')">1</button>
+				<button onclick="input('2')">2</button>
+				<button onclick="input('3')">3</button>
+				<button onclick="input('-')">-</button>
+			</div>
+			<div class="firstfloor">
+				<button onclick="input('0')">0</button>
+				<button onclick="input('.')">.</button>
+				<button onclick="input('=')">=</button>
+				<button onclick="input('+')">+</button>
+			</div>
+		</div>
+		<script>
+			function input(value) {
+				switch (value) {
+					case '=':
+						var mod_result = document.getElementById("output").innerHTML; // Inserting it into the new variable  
+						mod_result = mod_result.replace(/×/gi, "*"); // Adjusting the multiplication sign
+						mod_result = mod_result.replace(/÷/gi, "/"); // Adjusting the division sign				   
+						mod_result = mod_result.replace(/sin/gi, "Math.sin"); // Replacing all the "sin"
+						mod_result = mod_result.replace(/cos/gi, "Math.cos"); // Replacing all the "cos"
+						mod_result = mod_result.replace(/tan/gi, "Math.tan"); // Replacing all the "tan"
+						mod_result = mod_result.replace(/π/gi, "Math.PI"); // Replacing all the "PI"
+						document.getElementById("output").innerHTML = eval(mod_result); // Evaluating and outputting the result
+						break;
+					case 'CE':
+						document.getElementById("output").innerHTML = document.getElementById("output").innerHTML.slice(0, -1); // Removing the last character of the string
+						break;
+					case 'C':
+						document.getElementById("output").innerHTML = "0"; // Clearing the whole computation
+						break;
+					case '.':
+						document.getElementById("output").innerHTML += value;
+						break;
+					case '+':
+						document.getElementById("output").innerHTML += value;
+						break;
+					case '-':
+						document.getElementById("output").innerHTML += value;
+						break;
+					case '×':
+						document.getElementById("output").innerHTML += value;
+						break;
+					case '÷':
+						document.getElementById("output").innerHTML += value;
+						break;	
+					case 'sin':
+						if (document.getElementById("output").innerHTML[0] == "0" && !("+-×÷.".includes(document.getElementById("output").innerHTML[1]))) {
+							document.getElementById("output").innerHTML = document.getElementById("output").innerHTML.replace("0", "");
+						}
+						document.getElementById("output").innerHTML += "sin(";	 
+						break;
+					case 'cos':
+						if (document.getElementById("output").innerHTML[0] == "0" && !("+-×÷.".includes(document.getElementById("output").innerHTML[1]))) {
+							document.getElementById("output").innerHTML = document.getElementById("output").innerHTML.replace("0", "");
+						}
+						document.getElementById("output").innerHTML += "cos(";
+						break;
+					case 'tan':
+						if (document.getElementById("output").innerHTML[0] == "0" && !("+-×÷.".includes(document.getElementById("output").innerHTML[1]))) {
+							document.getElementById("output").innerHTML = document.getElementById("output").innerHTML.replace("0", "");
+						}
+						document.getElementById("output").innerHTML += "tan(";
+						break;
+					default:
+						if (document.getElementById("output").innerHTML[0] == "0" && !("+-×÷.".includes(document.getElementById("output").innerHTML[1]))) {
+							document.getElementById("output").innerHTML = document.getElementById("output").innerHTML.replace("0", "");
+						}
+						document.getElementById("output").innerHTML += value;
+				}
+			}
+		</script>
+	</body>
+</html>
