@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Snake Game</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&display=swap');
+
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                font-size: 15px;
+                font-family: 'Orbitron', sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+            .scoreboard, .control-set {
+                width: 600px;
+            }
+            .scoreboard {
+	            font-size: 1.25em;
+	            font-weight: bolder;   
+            }
+            .snake_game {
+                position: relative;
+                width: 600px;
+                height: 460px;
+            } 
+            .canvas1 {
+                position: absolute; 
+                top: 0;
+                left: 0;
+	            border: 1px solid #d3d3d3;
+                background-color: #f1f1f1;
+            }
+            .canvas2 {
+                position: absolute; 
+                top: 0;
+                left: 0;
+	            border: 1px solid #d3d3d3;
+                background-color: rgba(0, 0, 0, 0.4);
+            }
+            .control-set {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                padding: 25px 0;
+            }
+            .control, .control-restart {
+                line-height: 2.25;
+                border-radius: 15px;
+                width: 65px;
+                border: 0;
+                cursor: pointer;
+                background-color: #dbdbdb;
+                box-shadow: 0 9px #777;
+                font-weight: bolder;
+                font-size: 0.75em;
+            }
+            .control-restart {
+                display: none;
+            }
+            .left-right {
+                display: flex;
+                justify-content: space-between;
+                width: 200px;
+            }
+            .control:active, .control-restart:active {
+                box-shadow: 0 4px #777;
+                transform: translateY(5px);
+            }
+            .control-restart {
+                font-family: 'Orbitron', sans-serif;
+                width: 80px;
+            }
+
+            @media screen and (max-width: 625px) {
+                .snake_game, .canvas1, .canvas2, .scoreboard, .control-set {
+                    width: 300px;
+                }
+                .snake_game, .canvas1, .canvas2 {
+                    height: 240px;
+                }
+                .scoreboard {
+                    font-size: 1em;
+                }
+                .control {
+                    width: 50px;
+                }
+                .left-right {
+                    width: 150px;
+                }
+            }
+        </style>
+	</head>
+	<body onload="startPlaying()">	
+        <div id="snake_game" class="snake_game"></div> 
+        <div id="control-set" class="control-set">
+			<button class="control" onmousedown="moveup()" onmouseup="moveup()">&uarr;</button>
+            <div class="left-right">
+                <button class="control" onmousedown="moveleft()" onmouseup="moveleft()">&larr;</button>
+                <button class="control" onmousedown="moveright()" onmouseup="moveright()">&rarr;</button>
+            </div>
+			<button class="control" onmousedown="movedown()" onmouseup="movedown()">&darr;</button>
+		</div>
+        <button id="control-restart" class="control-restart" onclick="restart()">Restart</button>
+		<script> 
+			var gamePlayer;
+			var redFruit;
+			var speedX = 0;
+			var speedY = 0;
+			var snake = [];
+			var head;
+			
+			var gameField = {
+                snake_game: document.getElementById("snake_game"),
+				canvas1: document.createElement("canvas"),
+                canvas2: document.createElement("canvas"),
+				scoreboard: document.createElement("p"),
+				start: function() {
+                    this.canvas1.className = "canvas1";
+                    this.canvas1.id = "canvas1";
+					this.canvas1.width = 600;
+					this.canvas1.height = 460;
+                    this.canvas1.style.zIndex = "0";
+					this.ctx1 = this.canvas1.getContext("2d");
+                    this.canvas2.className = "canvas2";
+                    this.canvas2.id = "canvas2";
+                    this.canvas2.width = 600;
+					this.canvas2.height = 460;
+                    this.canvas2.style.zIndex = "1";
+					this.ctx2 = this.canvas2.getContext("2d");
+                    this.scoreboard.className = "scoreboard";
+					this.score = 0;
+					this.snake_game.appendChild(this.canvas1);
+                    document.body.insertBefore(this.snake_game, document.body.childNodes[0]);
+					document.body.insertBefore(this.scoreboard, document.body.childNodes[0]);
+					this.scoreboard.innerHTML = "Score: " + this.score;
+					window.addEventListener("keydown", function(event) {
+						gameField.key = event.keyCode;
+						if ((gameField.key == 37) && (speedX != 20) && (speedX != 0 || speedY != 0)) { // At the start of the game, you can't start by going to the left.
+							speedX = -20;
+							speedY = 0;
+						}
+						if ((gameField.key == 38) && (speedY != 20)) {
+							speedY = -20;
+							speedX = 0; 
+						}
+						if ((gameField.key == 39) && (speedX != -20)){
+							speedX = 20;
+							speedY = 0;
+						}
+						if ((gameField.key == 40) && (speedY != -20)) {
+							speedY = 20;
+							speedX = 0;
+						}
+					});
+					this.running = setInterval(updateGameField, 100); // This setInterval() function continues calling the updateGameField() function after it's been executed.
+				},
+				scoreCount: function() {
+					this.score += 50;
+					gameField.scoreboard.innerHTML = "Score: " + this.score;
+				},
+				clear: function() {
+					this.ctx1.clearRect(0, 0, this.canvas1.width, this.canvas1.height);
+				},
+				stop: function() {
+					clearInterval(this.running);
+				}
+			}  
+
+			function startPlaying() {   
+				snake = [new integrant(100, 100, "green", 20, 20), 
+				new integrant(80, 100, "green", 20, 20), 
+				new integrant(60, 100, "green", 20, 20),
+				new integrant(40, 100, "green", 20, 20)];	
+				redFruit = new integrant((Math.round(Math.random() * 29) * 20), (Math.round(Math.random() * 22) * 20), "red", 20, 20); 
+				gameField.start();													  
+			}
+
+
+
+            function restart() {
+                gameField.snake_game.removeChild(gameField.canvas2);
+                gameField.snake_game.removeChild(gameField.canvas1);
+                document.getElementById("control-restart").style.display = "none";
+                document.getElementById("control-set").style.display = "flex";
+                snake = [new integrant(100, 100, "green", 20, 20), 
+				new integrant(80, 100, "green", 20, 20), 
+				new integrant(60, 100, "green", 20, 20),
+				new integrant(40, 100, "green", 20, 20)];	
+                speedX = 0;
+                speedY = 0;
+				redFruit = new integrant((Math.round(Math.random() * 29) * 20), (Math.round(Math.random() * 22) * 20), "red", 20, 20); 
+				gameField.start();	
+            }
+
+			function integrant(x, y, color, width, height) { 
+				this.x = x;
+				this.y = y;
+				this.width = width;
+				this.height = height;
+				this.score = 0;		   
+				this.newPosition = function() {
+					if ((speedX != 0) || (speedY != 0)) {
+					   head = new integrant(this.x + speedX, this.y + speedY, "green", 20, 20);					   
+                       snake.unshift(head); // Moving the snake by adding the head to the beginning of the snake array.
+                       snake.pop(); // Moving the snake by removing the last element of the snake array.
+					}
+					else {
+					   this.x += speedX;
+					   this.y += speedY; 
+					}				
+				}	   
+				this.eatTouch = function(item) {
+					var touch = false;
+					if ((this.x == item.x) && (this.y == item.y)) {
+						touch = true;
+					}
+					return touch;
+				}  
+				this.wallCrash = function() {
+					var playerTop = this.y;
+					var playerLeft = this.x;
+					var playerRight = this.x + this.width;
+					var playerBottom = this.y + this.height;
+					var crash = false;
+					if (playerLeft < 0 || playerRight > gameField.canvas1.width || playerTop < 0 || playerBottom > gameField.canvas1.height) {
+						crash = true;
+					}
+					return crash;
+				}
+				this.update = function() {
+					gameField.ctx1.fillStyle = color;		
+					gameField.ctx1.strokeRect(this.x, this.y, this.width, this.height);	 
+					gameField.ctx1.fillRect(this.x, this.y, this.width, this.height);	
+				}				
+			}  
+
+			function moveleft() {
+                if (speedX != 20 && (speedX != 0 || speedY != 0)) {
+                    speedX = -20;
+                    speedY = 0;
+                }
+			}
+
+			function moveup() {
+                if (speedY != 20) {
+                    speedY = -20;
+                    speedX = 0;
+                }
+			}
+
+			function moveright() {
+                if (speedX != -20) {
+                    speedX = 20;
+                    speedY = 0; 
+                }
+			}
+
+			function movedown() {
+                if (speedY != -20) {
+                    speedY = 20;
+                    speedX = 0;
+                }
+            }
+
+			function updateGameField() {
+				gameField.clear();
+				redFruit.update();	
+				snake[0].newPosition();
+                for (i = 1; i < snake.length; i++) {
+                    if ((snake[0].x == snake[i].x) && (snake[0].y == snake[i].y)) {
+                        gameField.stop();
+                        gameField.snake_game.appendChild(gameField.canvas2);
+                        var rectWidth = 270, rectHeight = 180;
+                        gameField.ctx2.fillStyle = "#FFFFFF";
+                        gameField.ctx2.fillRect(300 - rectWidth / 2, 230 - rectHeight / 2, rectWidth, rectHeight);
+                        gameField.ctx2.strokeStyle = "#000000";
+                        gameField.ctx2.lineWidth = 2.5;
+                        gameField.ctx2.strokeRect(300 - rectWidth / 2, 230 - rectHeight / 2, rectWidth, rectHeight);
+                        gameField.ctx2.textAlign = "center";
+                        gameField.ctx2.fillStyle = "black";
+                        gameField.ctx2.font = "bold 21px Courier New";
+                        gameField.ctx2.fillText("Game Over", 300, 200); 
+                        gameField.ctx2.font = "bold 16px Courier New";
+                        gameField.ctx2.fillText("Your Final Score: " + gameField.score, 300, 240);
+                        document.getElementById("control-set").style.display = "none";
+                        document.getElementById("control-restart").style.display = "block";
+                        document.getElementById("control-restart").style.margin = "25px";
+                    }
+                }
+				if (snake[0].eatTouch(redFruit)) {
+					gameField.scoreCount();
+					gameField.ctx1.clearRect(redFruit.x, redFruit.y, redFruit.width, redFruit.height);			   
+                    snake.unshift(head);
+					redFruit.x = (Math.round(Math.random() * 29) * 20);
+					redFruit.y = (Math.round(Math.random() * 22) * 20);
+                    while(snake.some(function(snakePart) {
+                        return ((snakePart.x == redFruit.x) && (snakePart.y == redFruit.y));
+                    })) {
+                        redFruit.x = (Math.round(Math.random() * 29) * 20);
+                        redFruit.y = (Math.round(Math.random() * 22) * 20);
+                    }
+				} 
+				if (snake[0].wallCrash()) {
+					gameField.stop();
+                    gameField.snake_game.appendChild(gameField.canvas2);
+                    var rectWidth = 270, rectHeight = 180;
+                    gameField.ctx2.fillStyle = "#FFFFFF";
+                    gameField.ctx2.fillRect(300 - rectWidth / 2, 230 - rectHeight / 2, rectWidth, rectHeight);
+                    gameField.ctx2.strokeStyle = "#000000";
+                    gameField.ctx2.lineWidth = 2.5;
+                    gameField.ctx2.strokeRect(300 - rectWidth / 2, 230 - rectHeight / 2, rectWidth, rectHeight);
+					gameField.ctx2.textAlign = "center";
+					gameField.ctx2.fillStyle = "black";
+					gameField.ctx2.font = "bold 21px Courier New";
+					gameField.ctx2.fillText("Game Over", 300, 200);
+                    gameField.ctx2.font = "bold 16px Courier New";
+                    gameField.ctx2.fillText("Your Final Score: " + gameField.score, 300, 240);
+                    document.getElementById("control-set").style.display = "none";
+                    document.getElementById("control-restart").style.display = "block";
+                    document.getElementById("control-restart").style.margin = "25px";
+				}  	
+				snake.forEach(function(snakePart) {
+					snakePart.update()
+				});			
+			}
+		</script>	
+	</body>
+</html>
