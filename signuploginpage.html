@@ -166,18 +166,18 @@
             </form>
         </div>
         <div class="signup-bg" id="signup-bg">
-            <form class="form" method="post">
+            <form class="form" action="http://localhost/helloworld/signup.php" method="post">
                 <header class="header">
                     <h2>Signup</h2>
                 </header>
                 <label class="label" for="first_name">First Name:</label>
-                <input class="input" id="first_name" type="text" required />
+                <input class="input" id="first_name" type="text" name="first_name" required />
                 <label class="label" for="last_name">Last Name:</label>
-                <input class="input" id="last_name" type="text" required />
+                <input class="input" id="last_name" type="text" name="last_name" required />
                 <label class="label" for="email">Email:</label>
-                <input class="input" id="email" type="email" placeholder="example@example.com" />
+                <input class="input" id="email" type="email" name="email" placeholder="example@example.com" required />
                 <label class="label" for="password">Password:</label>
-                <input class="input" id="password" type="password" required /> 
+                <input class="input" id="password" type="password" name="password" required /> 
                 <div class="flex-item">
                     <div class="checkbox">
                         <input id="agreement" type="checkbox" name="agree-disagree" value="agree" required />
@@ -197,12 +197,12 @@
             </form>
         </div>
         <div class="reset_password-bg" id="reset_password-bg"> 
-            <form class="form" method="post">
+            <form class="form" action="http://localhost/helloworld/emailreceiver.php" method="post">
                 <header class="header">
                     <h2>Reset Password</h2>
                 </header>
                 <label class="label" for="email">Email:</label>
-                <input class="input" id="email" type="email" placeholder="example@example.com" required />
+                <input class="input" id="email" type="email" name="email" placeholder="example@example.com" required />
                 <input class="reset-button" type="submit" value="Reset" />
                 <p class="back-to-login" onclick="back_to_login()">Back To Login</p>
             </form>
