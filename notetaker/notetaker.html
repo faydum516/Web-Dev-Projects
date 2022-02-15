@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Note Collector</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="notetaker.css">
+        <script src="notetaker.js"></script>
+	</head>
+	<body>
+        <nav class="navbar">
+            <ul class="menu">
+                <li class="menu-item" onclick="add()">Add</li>
+                <li class="menu-item" onclick="detach()">Detach</li>
+            </ul>
+        </nav>
+        <main class="main">
+            <header>
+                <h1>Note Collector</h1>
+            </header>
+            <section class="note-taking-section" id="note-taking-section">
+                <form class="form">
+                    <label class="label" style="font-weight: 700;" for="key">Key Word:</label>
+                    <input class="input" id="key" type="text" />
+                    <label class="label" style="font-weight: 700;" for="value">Description:</label>
+                    <textarea class="textarea" id="value" placeholder="Explain it..."></textarea>
+                    <button class="store" onclick="store()">Store</button>
+                </form>
+            </section> 
+            <section class="note-removing-section" id="note-removing-section">
+                <form class="form">
+                    <label class="label" style="font-weight: 700;" for="item-removal">Key Word:</label>
+                    <input class="input" id="item-removal" type="text" />
+                    <button class="remove" onclick="remove()">Remove</button>
+                </form>
+            </section>
+        </main> 
+        <footer class="footer">
+            <h3>2022 CrazyJay Inc.</h3>
+        </footer>
+	</body>
+</html>

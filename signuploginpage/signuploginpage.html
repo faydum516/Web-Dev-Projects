@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sign-up/Log-in Page</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+        <link rel="stylesheet" href="signuploginpage.css">
+        <script src="signuploginpage.js"></script>
+	</head>
+	<body>
+        <div class="login-bg" id="login-bg">
+            <form class="form" method="post">
+                <header class="header">
+                    <h2>Login</h2>
+                </header>
+                <label class="label" for="email">Email:</label>
+                <input class="input" id="email" type="email" placeholder="example@example.com" required />
+                <label class="label" for="password">Password:</label>
+                <input class="input" id="password" type="password" required />
+                <label class="remember-me" for="remember"><input id="remember" type="checkbox" name="remember-forget" value="remember"> Remember Me?</label>
+                <input class="login-button" type="submit" value="Login" />
+                <p class="forget-password" onclick="reset_password()">Forget password?</p>
+                <p class="or">or</p>
+                <div class="social-icons">
+                    <a href="https://accounts.google.com" target="_blank" class="fa fa-google"></a>
+                    <a href="https://www.facebook.com" target="_blank" class="fa fa-facebook"></a>
+				    <a href="https://www.linkedin.com" target="_blank" class="fa fa-linkedin"></a>
+                </div>
+                <p class="sign-up">Don't have an account? <u style="cursor: pointer;" onclick="signup()">SIGN UP</u></p>
+            </form>
+        </div>
+        <div class="signup-bg" id="signup-bg">
+            <form class="form" action="http://localhost/helloworld/signup.php" method="post">
+                <header class="header">
+                    <h2>Signup</h2>
+                </header>
+                <label class="label" for="first_name">First Name:</label>
+                <input class="input" id="first_name" type="text" name="first_name" required />
+                <label class="label" for="last_name">Last Name:</label>
+                <input class="input" id="last_name" type="text" name="last_name" required />
+                <label class="label" for="email">Email:</label>
+                <input class="input" id="email" type="email" name="email" placeholder="example@example.com" required />
+                <label class="label" for="password">Password:</label>
+                <input class="input" id="password" type="password" name="password" required /> 
+                <div class="flex-item">
+                    <div class="checkbox">
+                        <input id="agreement" type="checkbox" name="agree-disagree" value="agree" required />
+                    </div>
+                    <div class="agree-check">
+                        <label for="agreement">By creating an account, you agree to the <a href="#" style="color: rgb(0, 0, 230);">Terms & Conditions</a>.</label>
+                    </div>
+                </div> 
+                <input class="signup-button" type="submit" value="Signup" />
+                <p class="or" style="padding-top: 10px;">or</p>
+                <div class="social-icons">
+                    <a href="https://accounts.google.com" target="_blank" class="fa fa-google"></a>
+                    <a href="https://www.facebook.com" target="_blank" class="fa fa-facebook"></a>
+				    <a href="https://www.linkedin.com" target="_blank" class="fa fa-linkedin"></a>
+                </div>
+                <p class="log-in">Already a user? <u style="cursor: pointer;" onclick="login()">LOG IN</u></p>
+            </form>
+        </div>
+        <div class="reset_password-bg" id="reset_password-bg"> 
+            <form class="form" action="http://localhost/helloworld/emailreceiver.php" method="post">
+                <header class="header">
+                    <h2>Reset Password</h2>
+                </header>
+                <label class="label" for="email">Email:</label>
+                <input class="input" id="email" type="email" name="email" placeholder="example@example.com" required />
+                <input class="reset-button" type="submit" value="Reset" />
+                <p class="back-to-login" onclick="back_to_login()">Back To Login</p>
+            </form>
+        </div>
+	</body>
+</html>

@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&display=swap');
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 15px;
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.scoreboard, .control-set {
+    width: 600px;
+}
+.scoreboard {
+    font-size: 1.25em;
+    font-weight: bolder;   
+}
+.snake_game {
+    position: relative;
+    width: 600px;
+    height: 460px;
+} 
+.canvas1 {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    border: 1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+.canvas2 {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    border: 1px solid #d3d3d3;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.control-set {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 25px 0;
+}
+.control, .control-restart {
+    line-height: 2.25;
+    border-radius: 15px;
+    width: 65px;
+    border: 0;
+    cursor: pointer;
+    background-color: #dbdbdb;
+    box-shadow: 0 9px #777;
+    font-weight: bolder;
+    font-size: 0.75em;
+}
+.control-restart {
+    display: none;
+}
+.left-right {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+}
+.control:active, .control-restart:active {
+    box-shadow: 0 4px #777;
+    transform: translateY(5px);
+}
+.control-restart {
+    font-family: 'Orbitron', sans-serif;
+    width: 80px;
+}
+
+@media screen and (max-width: 625px) {
+    .snake_game, .canvas1, .canvas2, .scoreboard, .control-set {
+        width: 300px;
+    }
+    .snake_game, .canvas1, .canvas2 {
+        height: 240px;
+    }
+    .scoreboard {
+        font-size: 1em;
+    }
+    .control {
+        width: 50px;
+    }
+    .left-right {
+        width: 150px;
+    }
+}
