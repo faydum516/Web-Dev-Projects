@@ -49,20 +49,20 @@
 					document.body.insertBefore(this.scoreboard, document.body.childNodes[0]);
 					this.scoreboard.innerHTML = "Score: " + this.score;
 					window.addEventListener("keydown", function(event) {
-						gameField.key = event.keyCode;
-						if ((gameField.key == 37) && (speedX != 20) && (speedX != 0 || speedY != 0)) { // At the start of the game, you can't start by going to the left.
+						gameField.key = event.key;
+						if ((gameField.key === "ArrowLeft") && (speedX != 20) && (speedX != 0 || speedY != 0)) { // At the start of the game, you can't start by going to the left.
 							speedX = -20;
 							speedY = 0;
 						}
-						if ((gameField.key == 38) && (speedY != 20)) {
+						if ((gameField.key === "ArrowUp") && (speedY != 20)) {
 							speedY = -20;
 							speedX = 0; 
 						}
-						if ((gameField.key == 39) && (speedX != -20)){
+						if ((gameField.key === "ArrowRight") && (speedX != -20)) {
 							speedX = 20;
 							speedY = 0;
 						}
-						if ((gameField.key == 40) && (speedY != -20)) {
+						if ((gameField.key === "ArrowDown") && (speedY != -20)) {
 							speedY = 20;
 							speedX = 0;
 						}
