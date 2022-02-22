@@ -251,7 +251,7 @@ function compute(digit) {
                 operate = undefined;
             }
             if (n1 == undefined && n2 == undefined && operate == undefined) {
-                if (document.getElementById("output").innerHTML.length === 9) {
+                if (document.getElementById("output").innerHTML.length === 9) { // In case for example 0.0000000 turns into 0.
                     addDigit = true;
                 }
                 n1 = document.getElementById("output").innerHTML;
