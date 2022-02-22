@@ -59,6 +59,8 @@ function compute(digit) {
             document.getElementById("output").innerHTML = num;
             negative = true;
 
+            addDigit = false;
+
             // The AC/CE button switches from 'AC' to 'CE' when you start a new real number.
             if (document.getElementById("AC/CE").innerHTML == "AC") {
                 document.getElementById("AC/CE").innerHTML = "CE";
@@ -138,6 +140,9 @@ function compute(digit) {
             }
             else {
                 if (document.getElementById("output").innerHTML != Number(Math.PI.toFixed(11)).toPrecision()) {
+                    if (document.getElementById("output").innerHTML.length === 9) {
+                        addDigit = true;
+                    }
                     num = document.getElementById("output").innerHTML.slice(0, -1); // Removing the last character of the string
                     document.getElementById("output").innerHTML = num;
                 }
@@ -246,6 +251,9 @@ function compute(digit) {
                 operate = undefined;
             }
             if (n1 == undefined && n2 == undefined && operate == undefined) {
+                if (document.getElementById("output").innerHTML.length === 9) {
+                    addDigit = true;
+                }
                 n1 = document.getElementById("output").innerHTML;
                 document.getElementById("output").innerHTML = Number(Number(n1).toFixed(11)).toPrecision();
                 n1 = undefined;
