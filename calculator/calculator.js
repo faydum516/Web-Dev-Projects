@@ -6,6 +6,10 @@ let addDigit = true;
 function compute(digit) {
     switch (digit) {
         case 'sin':
+            if (document.getElementById("output").innerHTML.length >= 9) {
+                addDigit = true;
+            }
+
             num = Math.sin(document.getElementById("output").innerHTML);
             document.getElementById("output").innerHTML = Number(num.toFixed(11)).toPrecision();
             negative = true;
@@ -14,14 +18,14 @@ function compute(digit) {
             if (document.getElementById("AC/CE").innerHTML == "CE") {
                 document.getElementById("AC/CE").innerHTML = "AC";
             }
-
+            
+            num = "";
+            break;
+        case 'cos':
             if (document.getElementById("output").innerHTML.length >= 9) {
                 addDigit = true;
             }
 
-            num = "";
-            break;
-        case 'cos':
             num = Math.cos(document.getElementById("output").innerHTML);
             document.getElementById("output").innerHTML = Number(num.toFixed(11)).toPrecision();
             negative = true;
@@ -31,13 +35,13 @@ function compute(digit) {
                 document.getElementById("AC/CE").innerHTML = "AC";
             }
 
+            num = "";
+            break;
+        case 'tan':
             if (document.getElementById("output").innerHTML.length >= 9) {
                 addDigit = true;
             }
 
-            num = "";
-            break;
-        case 'tan':
             num = Math.tan(document.getElementById("output").innerHTML);
             document.getElementById("output").innerHTML = Number(num.toFixed(11)).toPrecision();
             negative = true;
@@ -45,10 +49,6 @@ function compute(digit) {
             // The AC/CE switches from 'CE' to 'AC' following this function button press.
             if (document.getElementById("AC/CE").innerHTML == "CE") {
                 document.getElementById("AC/CE").innerHTML = "AC";
-            }
-
-            if (document.getElementById("output").innerHTML.length >= 9) {
-                addDigit = true;
             }
 
             num = "";
@@ -68,6 +68,10 @@ function compute(digit) {
 
             break;
         case '√':
+            if (document.getElementById("output").innerHTML.length >= 9) {
+                addDigit = true;
+            }
+
             num = Math.sqrt(document.getElementById("output").innerHTML);
             document.getElementById("output").innerHTML = Number(num.toFixed(11)).toPrecision();
             negative = true;
@@ -75,10 +79,6 @@ function compute(digit) {
             // The AC/CE switches from 'CE' to 'AC' following this function button press.
             if (document.getElementById("AC/CE").innerHTML == "CE") {
                 document.getElementById("AC/CE").innerHTML = "AC";
-            }
-
-            if (document.getElementById("output").innerHTML.length >= 9) {
-                addDigit = true;
             }
 
             num = "";
@@ -240,6 +240,10 @@ function compute(digit) {
             num = "";
             break;
         case '=':
+            if (document.getElementById("output").innerHTML.length >= 9) {
+                addDigit = true;
+            }
+
             if (n1 != undefined && n2 == undefined && operate != undefined) {
                 num = Number(document.getElementById("output").innerHTML); 
                 n2 = num;
@@ -251,9 +255,6 @@ function compute(digit) {
                 operate = undefined;
             }
             if (n1 == undefined && n2 == undefined && operate == undefined) {
-                if (document.getElementById("output").innerHTML.length === 9) { // In case for example 0.0000000 turns into 0.
-                    addDigit = true;
-                }
                 n1 = document.getElementById("output").innerHTML;
                 document.getElementById("output").innerHTML = Number(Number(n1).toFixed(11)).toPrecision();
                 n1 = undefined;
@@ -262,11 +263,7 @@ function compute(digit) {
             // The AC/CE switches from 'CE' to 'AC' following the '=' button press.
             if (document.getElementById("AC/CE").innerHTML == "CE") {
                 document.getElementById("AC/CE").innerHTML = "AC";
-            }
-
-            if (document.getElementById("output").innerHTML.length >= 9) {
-                addDigit = true;
-            }
+            }   
 
             num = "";
             break;
