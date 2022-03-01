@@ -140,7 +140,7 @@ function compute(digit) {
             }
             else {
                 if (document.getElementById("output").innerHTML != Number(Math.PI.toFixed(11)).toPrecision()) {
-                    if (document.getElementById("output").innerHTML.length === 9) {
+                    if ((document.getElementById("output").innerHTML.length === 9 && !(document.getElementById("output").innerHTML.includes('-'))) || (document.getElementById("output").innerHTML.length === 10 && document.getElementById("output").innerHTML.includes('-'))) {
                         addDigit = true;
                     }
                     num = document.getElementById("output").innerHTML.slice(0, -1); // Removing the last character of the string
@@ -326,7 +326,7 @@ function compute(digit) {
                 if (addDigit) {
                     num += digit;
                     document.getElementById("output").innerHTML = num;
-                    if (document.getElementById("output").innerHTML.length === 9) {
+                    if ((document.getElementById("output").innerHTML.length === 9 && !(document.getElementById("output").innerHTML.includes('-'))) || (document.getElementById("output").innerHTML.length === 10 && document.getElementById("output").innerHTML.includes('-'))) {
                         addDigit = false;
                     }
                 }
