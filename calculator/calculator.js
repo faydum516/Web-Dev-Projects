@@ -88,7 +88,7 @@ function compute(digit) {
 
             if (operate != undefined) {
                 n1 = operate(n1, num);
-                document.getElementById("output").innerHTML = n1;
+                document.getElementById("output").innerHTML = Number(n1.toFixed(11)).toPrecision();
             }
             else {
                 n1 = num;
