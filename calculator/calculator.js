@@ -1,3 +1,5 @@
+let output = document.getElementById("output");
+let clear = document.getElementById("AC/CE");
 let num, n1, n2, result;
 let operate; // "operate" will be an arithmetic function.
 let negative = true;
@@ -6,49 +8,49 @@ let addDigit = true;
 function compute(digit) {
     switch (digit) {
         case 'sin':
-            if (document.getElementById("output").innerHTML.length >= 9) {
+            if (output.innerHTML.length >= 9) {
                 addDigit = true;
             }
 
-            num = Math.sin(document.getElementById("output").innerHTML);
-            document.getElementById("output").innerHTML = Number(num.toFixed(11)).toPrecision();
+            num = Math.sin(output.innerHTML);
+            output.innerHTML = Number(num.toFixed(11)).toPrecision();
             negative = true;
 
             // The AC/CE switches from 'CE' to 'AC' following this function button press.
-            if (document.getElementById("AC/CE").innerHTML == "CE") {
-                document.getElementById("AC/CE").innerHTML = "AC";
+            if (clear.innerHTML == "CE") {
+                clear.innerHTML = "AC";
+            }
+
+            num = "";
+            break;
+        case 'cos':
+            if (output.innerHTML.length >= 9) {
+                addDigit = true;
+            }
+
+            num = Math.cos(output.innerHTML);
+            output.innerHTML = Number(num.toFixed(11)).toPrecision();
+            negative = true;
+
+            // The AC/CE switches from 'CE' to 'AC' following this function button press.
+            if (clear.innerHTML == "CE") {
+                clear.innerHTML = "AC";
             }
             
             num = "";
             break;
-        case 'cos':
-            if (document.getElementById("output").innerHTML.length >= 9) {
-                addDigit = true;
-            }
-
-            num = Math.cos(document.getElementById("output").innerHTML);
-            document.getElementById("output").innerHTML = Number(num.toFixed(11)).toPrecision();
-            negative = true;
-
-            // The AC/CE switches from 'CE' to 'AC' following this function button press.
-            if (document.getElementById("AC/CE").innerHTML == "CE") {
-                document.getElementById("AC/CE").innerHTML = "AC";
-            }
-
-            num = "";
-            break;
         case 'tan':
-            if (document.getElementById("output").innerHTML.length >= 9) {
+            if (output.innerHTML.length >= 9) {
                 addDigit = true;
             }
 
-            num = Math.tan(document.getElementById("output").innerHTML);
-            document.getElementById("output").innerHTML = Number(num.toFixed(11)).toPrecision();
+            num = Math.tan(output.innerHTML);
+            output.innerHTML = Number(num.toFixed(11)).toPrecision();
             negative = true;
 
             // The AC/CE switches from 'CE' to 'AC' following this function button press.
-            if (document.getElementById("AC/CE").innerHTML == "CE") {
-                document.getElementById("AC/CE").innerHTML = "AC";
+            if (clear.innerHTML == "CE") {
+                clear.innerHTML = "AC";
             }
 
             num = "";
@@ -56,39 +58,39 @@ function compute(digit) {
         case 'π':
             num = "";
             num += Number(Math.PI.toFixed(11)).toPrecision();
-            document.getElementById("output").innerHTML = num;
+            output.innerHTML = num;
             negative = true;
 
             addDigit = false;
 
             // The AC/CE button switches from 'AC' to 'CE' when you start a new real number.
-            if (document.getElementById("AC/CE").innerHTML == "AC") {
-                document.getElementById("AC/CE").innerHTML = "CE";
+            if (clear.innerHTML == "AC") {
+                clear.innerHTML = "CE";
             }
 
             break;
         case '√':
-            if (document.getElementById("output").innerHTML.length >= 9) {
+            if (output.innerHTML.length >= 9) {
                 addDigit = true;
             }
 
-            num = Math.sqrt(document.getElementById("output").innerHTML);
-            document.getElementById("output").innerHTML = Number(num.toFixed(11)).toPrecision();
+            num = Math.sqrt(output.innerHTML);
+            output.innerHTML = Number(num.toFixed(11)).toPrecision();
             negative = true;
 
             // The AC/CE switches from 'CE' to 'AC' following this function button press.
-            if (document.getElementById("AC/CE").innerHTML == "CE") {
-                document.getElementById("AC/CE").innerHTML = "AC";
+            if (clear.innerHTML == "CE") {
+                clear.innerHTML = "AC";
             }
 
             num = "";
             break;
         case 'pow':
-            num = Number(document.getElementById("output").innerHTML);
+            num = Number(output.innerHTML);
 
             if (operate != undefined) {
                 n1 = operate(n1, num);
-                document.getElementById("output").innerHTML = Number(n1.toFixed(11)).toPrecision();
+                output.innerHTML = n1;
             }
             else {
                 n1 = num;
@@ -98,7 +100,7 @@ function compute(digit) {
                 return Math.pow(num1, num2);
             }
 
-            if (document.getElementById("output").innerHTML.length >= 9) {
+            if (output.innerHTML.length >= 9) {
                 addDigit = true;
             }
             
@@ -107,57 +109,57 @@ function compute(digit) {
         case '+/-':
             if (num != "") {
                 if (negative) {
-                    if (!(document.getElementById("output").innerHTML.includes('-'))) {
-                        num = '-'.concat(document.getElementById("output").innerHTML); // Rendering the number negative.
-                        document.getElementById("output").innerHTML = num;
+                    if (!(output.innerHTML.includes('-'))) {
+                        num = '-'.concat(output.innerHTML); // Rendering the number negative.
+                        output.innerHTML = num;
                         negative = false;
                     }
                     else {
-                        num = document.getElementById("output").innerHTML.substring(1); // Rendering back the number positive.
-                        document.getElementById("output").innerHTML = num;
+                        num = output.innerHTML.substring(1); // Rendering back the number positive.
+                        output.innerHTML = num;
                     }
                 }
                 else {
-                    num = document.getElementById("output").innerHTML.substring(1); // Rendering back the number positive.
-                    document.getElementById("output").innerHTML = num;
+                    num = output.innerHTML.substring(1); // Rendering back the number positive.
+                    output.innerHTML = num;
                     negative = true;
                 }
             }
             else {
                 num = "-0";
-                document.getElementById("output").innerHTML = num;
+                output.innerHTML = num;
             }
 
             // The AC/CE button switches from 'AC' to 'CE' when you start a new arithmetic expression.
-            if (document.getElementById("AC/CE").innerHTML == "AC") {
-                document.getElementById("AC/CE").innerHTML = "CE";
+            if (clear.innerHTML == "AC") {
+                clear.innerHTML = "CE";
             }
             break;
         case 'AC/CE':
-            if (document.getElementById("AC/CE").innerHTML === "AC") {
-                document.getElementById("AC/CE").innerHTML = "CE";
-                document.getElementById("output").innerHTML = "0";
+            if (clear.innerHTML === "AC") {
+                clear.innerHTML = "CE";
+                output.innerHTML = "0";
             }
             else {
-                if (document.getElementById("output").innerHTML != Number(Math.PI.toFixed(11)).toPrecision()) {
-                    if ((document.getElementById("output").innerHTML.length === 9 && !(document.getElementById("output").innerHTML.includes('-'))) || (document.getElementById("output").innerHTML.length === 10 && document.getElementById("output").innerHTML.includes('-'))) {
+                if (output.innerHTML != Number(Math.PI.toFixed(11)).toPrecision()) {
+                    if ((output.innerHTML.length === 9 && !(output.innerHTML.includes('-'))) || (output.innerHTML.length === 10 && output.innerHTML.includes('-'))) {
                         addDigit = true;
                     }
-                    num = document.getElementById("output").innerHTML.slice(0, -1); // Removing the last character of the string
-                    document.getElementById("output").innerHTML = num;
+                    num = output.innerHTML.slice(0, -1); // Removing the last character of the string
+                    output.innerHTML = num;
                 }
-                if (document.getElementById("output").innerHTML == "") {
-                    document.getElementById("output").innerHTML = "0";
+                if (output.innerHTML == "") {
+                    output.innerHTML = "0";
                 }
             }
             break;
         case '+':
-            num = Number(document.getElementById("output").innerHTML);
+            num = Number(output.innerHTML);
             negative = true;
 
             if (operate != undefined) {
                 n1 = operate(n1, num);
-                document.getElementById("output").innerHTML = Number(n1.toFixed(11)).toPrecision();
+                output.innerHTML = Number(n1.toFixed(11)).toPrecision();
             }
             else {
                 n1 = num;
@@ -167,19 +169,19 @@ function compute(digit) {
                 return num1 + num2;
             }
 
-            if (document.getElementById("output").innerHTML.length >= 9) {
+            if (output.innerHTML.length >= 9) {
                 addDigit = true;
             }
 
             num = "";
             break;
         case '-':
-            num = Number(document.getElementById("output").innerHTML);
+            num = Number(output.innerHTML);
             negative = true;
 
             if (operate != undefined) {
                 n1 = operate(n1, num);
-                document.getElementById("output").innerHTML = Number(n1.toFixed(11)).toPrecision();
+                output.innerHTML = Number(n1.toFixed(11)).toPrecision();
             }
             else {
                 n1 = num;
@@ -189,19 +191,19 @@ function compute(digit) {
                 return num1 - num2;
             }
 
-            if (document.getElementById("output").innerHTML.length >= 9) {
+            if (output.innerHTML.length >= 9) {
                 addDigit = true;
             }
 
             num = "";
             break;
         case '×':
-            num = Number(document.getElementById("output").innerHTML);
+            num = Number(output.innerHTML);
             negative = true;
 
             if (operate != undefined) {
                 n1 = operate(n1, num);
-                document.getElementById("output").innerHTML = Number(n1.toFixed(11)).toPrecision();
+                output.innerHTML = Number(n1.toFixed(11)).toPrecision();
             }
             else {
                 n1 = num;
@@ -211,19 +213,19 @@ function compute(digit) {
                 return num1 * num2;
             }
 
-            if (document.getElementById("output").innerHTML.length >= 9) {
+            if (output.innerHTML.length >= 9) {
                 addDigit = true;
             }
 
             num = "";
             break;
         case '÷':
-            num = Number(document.getElementById("output").innerHTML);
+            num = Number(output.innerHTML);
             negative = true;
 
             if (operate != undefined) {
                 n1 = operate(n1, num);
-                document.getElementById("output").innerHTML = Number(n1.toFixed(11)).toPrecision();
+                output.innerHTML = Number(n1.toFixed(11)).toPrecision();
             }
             else {
                 n1 = num;
@@ -233,108 +235,108 @@ function compute(digit) {
                 return num1 / num2;
             }
 
-            if (document.getElementById("output").innerHTML.length >= 9) {
+            if (output.innerHTML.length >= 9) {
                 addDigit = true;
             }
 
             num = "";
             break;
         case '=':
-            if (document.getElementById("output").innerHTML.length >= 9) {
+            if (output.innerHTML.length >= 9) {
                 addDigit = true;
             }
 
             if (n1 != undefined && n2 == undefined && operate != undefined) {
-                num = Number(document.getElementById("output").innerHTML); 
+                num = Number(output.innerHTML); 
                 n2 = num;
                 result = operate(n1, n2);
-                document.getElementById("output").innerHTML = Number(result.toFixed(11)).toPrecision();
+                output.innerHTML = Number(result.toFixed(11)).toPrecision();
                 n1 = undefined;
                 n2 = undefined;
                 result = undefined;
                 operate = undefined;
             }
             if (n1 == undefined && n2 == undefined && operate == undefined) {
-                n1 = document.getElementById("output").innerHTML;
-                document.getElementById("output").innerHTML = Number(Number(n1).toFixed(11)).toPrecision();
+                n1 = output.innerHTML;
+                output.innerHTML = Number(Number(n1).toFixed(11)).toPrecision();
                 n1 = undefined;
             }
 
             // The AC/CE switches from 'CE' to 'AC' following the '=' button press.
-            if (document.getElementById("AC/CE").innerHTML == "CE") {
-                document.getElementById("AC/CE").innerHTML = "AC";
-            }   
-
+            if (clear.innerHTML == "CE") {
+                clear.innerHTML = "AC";
+            }
+            
             num = "";
             break;
         case '.': // The digit is equal to '.' only if we go to this case.
             if (num != "") {
-                if (!(document.getElementById("output").innerHTML.includes('.'))) {
-                    if (document.getElementById("output").innerHTML == "0") {
+                if (!(output.innerHTML.includes('.'))) {
+                    if (output.innerHTML == "0") {
                         num = `0${digit}`; 
-                        document.getElementById("output").innerHTML = num; 
+                        output.innerHTML = num; 
                     }
-                    else if (document.getElementById("output").innerHTML == "-0") {
+                    else if (output.innerHTML == "-0") {
                         num = `-0${digit}`;
-                        document.getElementById("output").innerHTML = num; 
+                        output.innerHTML = num; 
                     }
-                    else if (document.getElementById("output").innerHTML == "-") {
+                    else if (output.innerHTML == "-") {
                         num = `-0${digit}`;
-                        document.getElementById("output").innerHTML = num;
+                        output.innerHTML = num;
                     }
                     else {
                         num += digit;
-                        document.getElementById("output").innerHTML = num;
-                        if (document.getElementById("output").innerHTML == ".") {
+                        output.innerHTML = num;
+                        if (output.innerHTML == ".") {
                             num = `0${digit}`;
-                            document.getElementById("output").innerHTML = num;
+                            output.innerHTML = num;
                         }
                     }
                 }
             }
             else {
                 num = "0.";
-                document.getElementById('output').innerHTML = num;
+                output.innerHTML = num;
             }
 
             // The AC/CE button switches from 'AC' to 'CE' when you start a new arithmetic expression.
-            if (document.getElementById("AC/CE").innerHTML == "AC") {
-                document.getElementById("AC/CE").innerHTML = "CE";
+            if (clear.innerHTML == "AC") {
+                clear.innerHTML = "CE";
             }
             break;
         default: // The default case is only for number digits.
             negative = true;
 
             /* When I start with the "0" digit, I cannot add more zeros as there must be only one at the beginning. */
-            if (document.getElementById("output").innerHTML == "0" && digit == '0') {
-                document.getElementById("output").innerHTML = "0";
+            if (output.innerHTML == "0" && digit == '0') {
+                output.innerHTML = "0";
             }
-            else if (document.getElementById("output").innerHTML == "0" && digit != '0') {
+            else if (output.innerHTML == "0" && digit != '0') {
                 num = "";
                 num += digit;
-                document.getElementById("output").innerHTML = num;
+                output.innerHTML = num;
             }
-            else if (document.getElementById("output").innerHTML == "-0" && digit == '0') {
-                document.getElementById("output").innerHTML = "-0";
+            else if (output.innerHTML == "-0" && digit == '0') {
+                output.innerHTML = "-0";
             }
-            else if (document.getElementById("output").innerHTML == "-0" && digit != '0') {
+            else if (output.innerHTML == "-0" && digit != '0') {
                 num = "-";
                 num += digit;
-                document.getElementById("output").innerHTML = num;
+                output.innerHTML = num;
             }
             else {
                 if (addDigit) {
                     num += digit;
-                    document.getElementById("output").innerHTML = num;
-                    if ((document.getElementById("output").innerHTML.length === 9 && !(document.getElementById("output").innerHTML.includes('-'))) || (document.getElementById("output").innerHTML.length === 10 && document.getElementById("output").innerHTML.includes('-'))) {
+                    output.innerHTML = num;
+                    if ((output.innerHTML.length === 9 && !(output.innerHTML.includes('-'))) || (output.innerHTML.length === 10 && output.innerHTML.includes('-'))) {
                         addDigit = false;
                     }
                 }
             }
 
             // The AC/CE button switches from 'AC' to 'CE' when you start a new arithmetic expression.
-            if (document.getElementById("AC/CE").innerHTML == "AC") {
-                document.getElementById("AC/CE").innerHTML = "CE";
+            if (clear.innerHTML == "AC") {
+                clear.innerHTML = "CE";
             }
     }
 }
