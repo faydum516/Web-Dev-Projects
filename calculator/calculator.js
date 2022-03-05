@@ -92,7 +92,6 @@ function compute(digit) {
 
             if (operate != undefined) {
                 n1 = operate(n1, num);
-                document.getElementById("output").innerHTML = n1;
                 document.getElementById("output").innerHTML = Number(n1.toFixed(11)).toPrecision();
             }
             else {
@@ -181,6 +180,7 @@ function compute(digit) {
 
             num = Number(document.getElementById("output").innerHTML);
             negative = true;
+
             if (operate != undefined) {
                 n1 = operate(n1, num);
                 document.getElementById("output").innerHTML = Number(n1.toFixed(11)).toPrecision();
