@@ -9,16 +9,15 @@ function compute(digit) {
             if (document.getElementById("output").innerHTML.length >= 9) {
                 addDigit = true;
             }
-
+            
             num = Math.sin(document.getElementById("output").innerHTML);
             document.getElementById("output").innerHTML = Number(num.toFixed(11)).toPrecision();
-            negative = true;
 
             // The AC/CE switches from 'CE' to 'AC' following this function button press.
-            if (document.getElementById("AC/CE").innerHTML == "CE") {
+            if (document.getElementById("AC/CE").innerHTML === "CE") {
                 document.getElementById("AC/CE").innerHTML = "AC";
             }
-            
+
             num = "";
             break;
         case 'cos':
@@ -28,10 +27,9 @@ function compute(digit) {
 
             num = Math.cos(document.getElementById("output").innerHTML);
             document.getElementById("output").innerHTML = Number(num.toFixed(11)).toPrecision();
-            negative = true;
 
             // The AC/CE switches from 'CE' to 'AC' following this function button press.
-            if (document.getElementById("AC/CE").innerHTML == "CE") {
+            if (document.getElementById("AC/CE").innerHTML === "CE") {
                 document.getElementById("AC/CE").innerHTML = "AC";
             }
 
@@ -44,10 +42,9 @@ function compute(digit) {
 
             num = Math.tan(document.getElementById("output").innerHTML);
             document.getElementById("output").innerHTML = Number(num.toFixed(11)).toPrecision();
-            negative = true;
 
             // The AC/CE switches from 'CE' to 'AC' following this function button press.
-            if (document.getElementById("AC/CE").innerHTML == "CE") {
+            if (document.getElementById("AC/CE").innerHTML === "CE") {
                 document.getElementById("AC/CE").innerHTML = "AC";
             }
 
@@ -58,11 +55,11 @@ function compute(digit) {
             num += Number(Math.PI.toFixed(11)).toPrecision();
             document.getElementById("output").innerHTML = num;
             negative = true;
-            
+
             addDigit = false;
 
             // The AC/CE button switches from 'AC' to 'CE' when you start a new real number.
-            if (document.getElementById("AC/CE").innerHTML == "AC") {
+            if (document.getElementById("AC/CE").innerHTML === "AC") {
                 document.getElementById("AC/CE").innerHTML = "CE";
             }
 
@@ -74,10 +71,9 @@ function compute(digit) {
 
             num = Math.sqrt(document.getElementById("output").innerHTML);
             document.getElementById("output").innerHTML = Number(num.toFixed(11)).toPrecision();
-            negative = true;
 
             // The AC/CE switches from 'CE' to 'AC' following this function button press.
-            if (document.getElementById("AC/CE").innerHTML == "CE") {
+            if (document.getElementById("AC/CE").innerHTML === "CE") {
                 document.getElementById("AC/CE").innerHTML = "AC";
             }
 
@@ -101,7 +97,7 @@ function compute(digit) {
             operate = function(num1, num2) {
                 return Math.pow(num1, num2);
             }
-            
+
             num = "";
             break;
         case '+/-':
@@ -129,7 +125,7 @@ function compute(digit) {
             }
 
             // The AC/CE button switches from 'AC' to 'CE' when you start a new arithmetic expression.
-            if (document.getElementById("AC/CE").innerHTML == "AC") {
+            if (document.getElementById("AC/CE").innerHTML === "AC") {
                 document.getElementById("AC/CE").innerHTML = "CE";
             }
             break;
@@ -139,15 +135,18 @@ function compute(digit) {
                 document.getElementById("output").innerHTML = "0";
             }
             else {
-                if (document.getElementById("output").innerHTML != Number(Math.PI.toFixed(11)).toPrecision()) {
+                if (document.getElementById("output").innerHTML !== Number(Math.PI.toFixed(11)).toPrecision() && document.getElementById("output").innerHTML !== Number(-Math.PI.toFixed(11)).toPrecision()) {
                     if ((document.getElementById("output").innerHTML.length === 9 && !(document.getElementById("output").innerHTML.includes('-'))) || (document.getElementById("output").innerHTML.length === 10 && document.getElementById("output").innerHTML.includes('-'))) {
                         addDigit = true;
                     }
                     num = document.getElementById("output").innerHTML.slice(0, -1); // Removing the last character of the string
                     document.getElementById("output").innerHTML = num;
                 }
-                if (document.getElementById("output").innerHTML == "") {
+                if (document.getElementById("output").innerHTML === "") {
                     document.getElementById("output").innerHTML = "0";
+                }
+                if (document.getElementById("output").innerHTML === "-") {
+                    document.getElementById("output").innerHTML = "-0";
                 }
             }
             break;
@@ -157,16 +156,15 @@ function compute(digit) {
             }
 
             num = Number(document.getElementById("output").innerHTML);
-            negative = true;
 
-            if (operate != undefined) {
+            if (operate !== undefined) {
                 n1 = operate(n1, num);
                 document.getElementById("output").innerHTML = Number(n1.toFixed(11)).toPrecision();
             }
             else {
                 n1 = num;
             }
-
+            
             operate = function(num1, num2) {
                 return num1 + num2;
             }
@@ -179,9 +177,8 @@ function compute(digit) {
             }
 
             num = Number(document.getElementById("output").innerHTML);
-            negative = true;
 
-            if (operate != undefined) {
+            if (operate !== undefined) {
                 n1 = operate(n1, num);
                 document.getElementById("output").innerHTML = Number(n1.toFixed(11)).toPrecision();
             }
@@ -201,16 +198,15 @@ function compute(digit) {
             }
 
             num = Number(document.getElementById("output").innerHTML);
-            negative = true;
 
-            if (operate != undefined) {
+            if (operate !== undefined) {
                 n1 = operate(n1, num);
                 document.getElementById("output").innerHTML = Number(n1.toFixed(11)).toPrecision();
             }
             else {
                 n1 = num;
             }
-           
+
             operate = function(num1, num2) {
                 return num1 * num2;
             }
@@ -223,9 +219,8 @@ function compute(digit) {
             }
 
             num = Number(document.getElementById("output").innerHTML);
-            negative = true;
 
-            if (operate != undefined) {
+            if (operate !== undefined) {
                 n1 = operate(n1, num);
                 document.getElementById("output").innerHTML = Number(n1.toFixed(11)).toPrecision();
             }
@@ -244,7 +239,7 @@ function compute(digit) {
                 addDigit = true;
             }
 
-            if (n1 != undefined && n2 == undefined && operate != undefined) {
+            if (n1 !== undefined && n2 === undefined && operate !== undefined) {
                 num = Number(document.getElementById("output").innerHTML); 
                 n2 = num;
                 result = operate(n1, n2);
@@ -254,14 +249,14 @@ function compute(digit) {
                 result = undefined;
                 operate = undefined;
             }
-            if (n1 == undefined && n2 == undefined && operate == undefined) {
+            if (n1 === undefined && n2 === undefined && operate === undefined) {
                 n1 = document.getElementById("output").innerHTML;
                 document.getElementById("output").innerHTML = Number(Number(n1).toFixed(11)).toPrecision();
                 n1 = undefined;
             }
 
             // The AC/CE switches from 'CE' to 'AC' following the '=' button press.
-            if (document.getElementById("AC/CE").innerHTML == "CE") {
+            if (document.getElementById("AC/CE").innerHTML === "CE") {
                 document.getElementById("AC/CE").innerHTML = "AC";
             } 
 
@@ -270,15 +265,15 @@ function compute(digit) {
         case '.': // The digit is equal to '.' only if we go to this case.
             if (num != "") {
                 if (!(document.getElementById("output").innerHTML.includes('.'))) {
-                    if (document.getElementById("output").innerHTML == "0") {
+                    if (document.getElementById("output").innerHTML === "0") {
                         num = `0${digit}`; 
                         document.getElementById("output").innerHTML = num; 
                     }
-                    else if (document.getElementById("output").innerHTML == "-0") {
+                    else if (document.getElementById("output").innerHTML === "-0") {
                         num = `-0${digit}`;
                         document.getElementById("output").innerHTML = num; 
                     }
-                    else if (document.getElementById("output").innerHTML == "-") {
+                    else if (document.getElementById("output").innerHTML === "-") {
                         num = `-0${digit}`;
                         document.getElementById("output").innerHTML = num;
                     }
@@ -298,26 +293,26 @@ function compute(digit) {
             }
 
             // The AC/CE button switches from 'AC' to 'CE' when you start a new arithmetic expression.
-            if (document.getElementById("AC/CE").innerHTML == "AC") {
+            if (document.getElementById("AC/CE").innerHTML === "AC") {
                 document.getElementById("AC/CE").innerHTML = "CE";
             }
             break;
         default: // The default case is only for number digits.
             negative = true;
-            
+
             /* When I start with the "0" digit, I cannot add more zeros as there must be only one at the beginning. */
-            if (document.getElementById("output").innerHTML == "0" && digit == '0') {
+            if (document.getElementById("output").innerHTML === "0" && digit === '0') {
                 document.getElementById("output").innerHTML = "0";
             }
-            else if (document.getElementById("output").innerHTML == "0" && digit != '0') {
+            else if (document.getElementById("output").innerHTML === "0" && digit !== '0') {
                 num = "";
                 num += digit;
                 document.getElementById("output").innerHTML = num;
             }
-            else if (document.getElementById("output").innerHTML == "-0" && digit == '0') {
+            else if (document.getElementById("output").innerHTML === "-0" && digit === '0') {
                 document.getElementById("output").innerHTML = "-0";
             }
-            else if (document.getElementById("output").innerHTML == "-0" && digit != '0') {
+            else if (document.getElementById("output").innerHTML === "-0" && digit !== '0') {
                 num = "-";
                 num += digit;
                 document.getElementById("output").innerHTML = num;
@@ -331,9 +326,9 @@ function compute(digit) {
                     }
                 }
             }
-            
+
             // The AC/CE button switches from 'AC' to 'CE' when you start a new arithmetic expression.
-            if (document.getElementById("AC/CE").innerHTML == "AC") {
+            if (document.getElementById("AC/CE").innerHTML === "AC") {
                 document.getElementById("AC/CE").innerHTML = "CE";
             }
     }
