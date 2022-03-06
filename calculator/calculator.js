@@ -86,7 +86,7 @@ function compute(digit) {
 
             num = Number(document.getElementById("output").innerHTML);
 
-            if (operate != undefined) {
+            if (operate !== undefined) {
                 n1 = operate(n1, num);
                 document.getElementById("output").innerHTML = Number(n1.toFixed(11)).toPrecision();
             }
@@ -265,7 +265,7 @@ function compute(digit) {
         case '.': // The digit is equal to '.' only if we go to this case.
             negative = true;    
 
-            if (num != "") {
+            if (num !== "") {
                 if (!(document.getElementById("output").innerHTML.includes('.'))) {
                     if (document.getElementById("output").innerHTML === "0") {
                         num = `0${digit}`; 
@@ -282,7 +282,7 @@ function compute(digit) {
                     else {
                         num += digit;
                         document.getElementById("output").innerHTML = num;
-                        if (document.getElementById("output").innerHTML == ".") {
+                        if (document.getElementById("output").innerHTML === ".") {
                             num = `0${digit}`;
                             document.getElementById("output").innerHTML = num;
                         }
