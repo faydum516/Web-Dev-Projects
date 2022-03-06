@@ -263,6 +263,8 @@ function compute(digit) {
             num = "";
             break;
         case '.': // The digit is equal to '.' only if we go to this case.
+            negative = true;    
+
             if (num != "") {
                 if (!(document.getElementById("output").innerHTML.includes('.'))) {
                     if (document.getElementById("output").innerHTML === "0") {
