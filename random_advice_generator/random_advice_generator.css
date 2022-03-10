@@ -45,6 +45,10 @@ body {
     border: 0;
     border-radius: 50%;
     background-color: hsl(150, 100%, 66%);
+	transition: box-shadow 0.25s ease-in;
+    -webkit-transition: box-shadow 0.25s ease-in;
+    -o-transition: box-shadow 0.25s ease-in;
+    -moz-transition: box-shadow 0.25s ease-in;
     transform: translate(-50%, 50%);
     -webkit-transform: translate(-50%, 50%);
     -o-transform: translate(-50%, 50%);
