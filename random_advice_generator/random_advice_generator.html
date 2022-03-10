@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Random Advice Generator</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <link rel="icon" href="https://faydum516.github.io/logos/icon-dice.svg" type="image/svg">
+        <link rel="stylesheet" href="random_advice_generator.css">
+        <script src="random_advice_generator.js"></script>
+	</head>
+	<body>
+		<div class="flashcard">
+			<h6 id="advice-number" class="advice-number"></h6>
+			<p id="quote" class="quote"></p>
+            <img class="divider" src="https://faydum516.github.io/logos/pattern-divider-desktop.svg" width="90%" alt="divider" />
+            <div class="circle" onclick="reload('https://api.adviceslip.com/advice')">
+                <img class="dice-button" src="https://faydum516.github.io/logos/icon-dice.svg" width="50%" alt="icon-dice" />
+            </div>
+		</div>
+	</body>
+</html>
