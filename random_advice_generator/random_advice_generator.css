@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600&display=swap');
 
 * {
 	margin: 0; padding: 0;
-	font-family: 'Manrope', sans-serif;
 }
 body {
 	width: 100%;
@@ -10,11 +9,12 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #1a1a1a;
+	background-color: hsl(219, 19%, 15%);
+    font-size: 28px;
 }
 .flashcard {
-	min-width: 237.5px;
-	width: 237.5px;
+	min-width: 275px;
+	width: 275px;
 	padding: 25px;
 	display: flex;
 	justify-content: center;
@@ -22,18 +22,21 @@ body {
 	flex-direction: column;
 	border: 0;
 	border-radius: 7.5px;
-	background-color: #383838;
+	background-color: hsl(217, 19%, 25%);
     position: relative;
 }
-.advice-number {
+.advice-header {
 	color: hsl(150, 100%, 66%);
-    font-weight: 600;
+    font-size: 0.1875em;
+    font-family: 'Montserrat', sans-serif;
 }
 .quote {
-    font-weight: 600;
+    font-weight: 700;
 	padding: 25px 10px;
 	text-align: center;
 	color: hsl(193, 38%, 86%);
+    font-size: 0.6em;
+    font-family: 'Manrope', sans-serif;
 }
 .divider {
     padding-bottom: 20px;
@@ -45,7 +48,7 @@ body {
     border: 0;
     border-radius: 50%;
     background-color: hsl(150, 100%, 66%);
-	transition: box-shadow 0.25s ease-in;
+    transition: box-shadow 0.25s ease-in;
     -webkit-transition: box-shadow 0.25s ease-in;
     -o-transition: box-shadow 0.25s ease-in;
     -moz-transition: box-shadow 0.25s ease-in;
